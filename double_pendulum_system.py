@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import argparse
 
 class Mass:
     def __init__(self, mass, length, theta, omega):
@@ -13,7 +14,6 @@ class Mass:
         self.mass = mass
         self.length = length
         self.theta = theta
-        self.omega = omega  # Velocidad angular
 
 class System:
     def __init__(self, m1, l1, theta1, omega1, m2, l2, theta2, omega2, g=9.81):
@@ -110,14 +110,30 @@ class System:
                 state = self.runge_kutta_step(state, dt)
                 time += dt
 
-if __name__ == "__main__":
-    # Parámetros del péndulo doble
-    m1, l1, theta1, omega1 = 1.0, 1.0, np.pi / 2, 0.0
-    m2, l2, theta2, omega2 = 1.0, 1.0, np.pi / 2, 0.0
-    dt = 0.01
-    t_max = 10.0
+def main():
+    parser = argparse.ArgumentParser(description="Simulación de un péndulo doble")
+    
+    parser.add_argument('--m1', default=1.0, help="Masa del primer péndulo (kg)")
+    parser.add_argument('--l1', default=1.0, help="Longitud del primer péndulo (m)")
+    parser.add_argument('--theta1', default=np.pi / 2, help="Ángulo inicial del primer péndulo (rad)")
+    parser.add_argument('--omega1', default=0.0, help="Velocidad angular inicial del primer péndulo (rad/s)")
+    
+    parser.add_argument('--m2', default=1.0, help="Masa del segundo péndulo (kg)")
+    parser.add_argument('--l2', default=1.0, help="Longitud del segundo péndulo (m)")
+    parser.add_argument('--theta2', default=np.pi / 2, help="Ángulo inicial del segundo péndulo (rad)")
+    parser.add_argument('--omega2', default=0.0, help="Velocidad angular inicial del segundo péndulo (rad/s)")
+    
+    parser.add_argument('--dt', default=0.01, help="Intervalo de tiempo (s) entre pasos de simulación")
+    parser.add_argument('--t_max', default=10.0, help="Tiempo máximo de simulación (s)")
+    parser.add_argument('--ndata', default='data.dat', help="Nombre del archivo de datos.")
 
-    system = System(m1, l1, theta1, omega1, m2, l2, theta2, omega2)
-    system.simulate(t_max, dt)
-    print("Simulación completada. Datos guardados en 'data/data.dat'.")
+    args = parser.parse_args()
+    system = System(float(args.m1), float(args.l1), float(args.theta1), float(args.omega1),
+                    float(args.m2), float(args.l2), float(args.theta2), float(args.omega2), data_name=data_name)
+    
+    system.simulate(args.t_max, args.dt)
+    print("Simulación completada. Datos guardados en 'data/{}.dat'.")
+
+if __name__ == "__main__":
+    main()
 
