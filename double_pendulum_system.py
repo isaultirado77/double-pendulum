@@ -125,11 +125,11 @@ def main():
     
     parser.add_argument('--dt', default=0.01, help="Intervalo de tiempo (s) entre pasos de simulación")
     parser.add_argument('--t_max', default=10.0, help="Tiempo máximo de simulación (s)")
-    parser.add_argument('--ndata', default='data.dat', help="Nombre del archivo de datos.")
+    parser.add_argument('--ndata', required= False, default='data.dat', help="Nombre del archivo de datos.")
 
     args = parser.parse_args()
     system = System(float(args.m1), float(args.l1), float(args.theta1), float(args.omega1),
-                    float(args.m2), float(args.l2), float(args.theta2), float(args.omega2), data_name=data_name)
+                    float(args.m2), float(args.l2), float(args.theta2), float(args.omega2), args.ndata)
     
     system.simulate(args.t_max, args.dt)
     print("Simulación completada. Datos guardados en 'data/{}.dat'.")
