@@ -1,43 +1,37 @@
-# Simulación de Oscilador Doble
+# Simulación de Péndulo Doble
 
-Este proyecto simula el movimiento de un péndulo doble utilizando el método Ralston-Rabinowitz (RK) para resolver las ecuaciones de movimiento. El objetivo es simular el sistema, calcular su dinámica y generar resultados como las trayectorias y energías de los osciladores.
+Este proyecto simula el movimiento de un péndulo doble utilizando el método de Runge-Kutta (RK) para resolver las ecuaciones de movimiento. Se pueden visualizar trayectorias, espacio fase y energía del sistema, comparando escenarios de pequeñas oscilaciones y movimiento caótico.
 
-## Descripción
 
-El sistema tiene dos masas conectadas por sus respectivos péndulos. La primera masa está conectada al pivote, y la segunda está unida a la primera masa. La simulación utiliza el método RK, actualizando la posición y la velocidad de las masas paso a paso.
+## Análisis y Resultados
+Los resultados, incluyendo trayectorias, espacio fase y energía, se encuentran en el notebook:
 
-### Detalles del Sistema
-- **Péndulo 1**:
-  - Masa: \(m1 = 0.5 \text{kg}\).
-  - Longitud del péndulo: \(l1 = 1.3 \text{m}\).
-  - Masa del segundo péndulo: \(m2 = 1.5 \text{kg}\).
+[![Ver Análisis en Jupyter](https://nbviewer.jupyter.org/github/usuario/repositorio/blob/main/double_pendulum_analysis.ipynb)](https://nbviewer.jupyter.org/github/usuario/repositorio/blob/main/double_pendulum_analysis.ipynb)
 
-- **Péndulo 2**:
-  - Longitud del péndulo: \(l2 = 1.5 \text{m}\).
-  - Condiciones iniciales: Las posiciones angulares iniciales (\(\theta1\), \(\theta2\)) y las velocidades angulares (\(\dot{x}1\), \(\dot{x}2\)) se establecen en 0.15 radianes y \(\dot{X}\) en 3000 m/s.
+## Ejecución de la Simulación
 
-### Resultados de la Simulación
-1. **Trayectorias**: Simulación de la posición de las masas en el péndulo.
-2. **Dinámica de Energía**: Cálculo de las energías totales del sistema, que incluye las energías cinética y potencial del sistema.
+La simulación puede ejecutarse con valores predefinidos o personalizarse mediante `argparse`:
 
-## Requisitos
+### 1. Uso con valores predefinidos:
+```python
+m1, l1, theta1_init, omega1_init = 1.0, 1.0, 1.5, 0.0
+m2, l2, theta2_init, omega2_init = 1.0, 1.0, 1.5, 0.0
+dt = 0.01
+t_max = 10.0
 
-- **Python 3.7** o superior.
-- Bibliotecas requeridas:
-  - Numpy.
-  - Matplotlib
-
-Instalar las bibliotecas requeridas con:
-```bash
-pip install numpy
-pip install matplotlib 
+system = System(m1, l1, theta1_init, omega1_init, m2, l2, theta2_init, omega2_init)
+system.simulate(t_max, dt)
 ```
 
-## Pasos de la Simulación
+### 2. Uso con `argparse`:
+```bash
+python main.py --m1 1.0 --l1 1.0 --theta1 1.5 --omega1 0.0 \
+               --m2 1.0 --l2 1.0 --theta2 1.5 --omega2 0.0 \
+               --dt 0.01 --t_max 10.0 --ndata data.dat
 
-1. Simular el movimiento del electrón bajo la influencia del campo eléctrico (script principal).
-2. La solución se calcula utilizando el método RK4, asegurándose de implementar las ecuaciones de movimiento para cada péndulo.
-
-3. Las posiciones/velocidades actualizadas de los péndulos se proporcionan en un arreglo.
-
----
+## Requisitos
+- **Python 3.7** o superior.
+- Bibliotecas necesarias:
+  ```bash
+  pip install numpy matplotlib
+  ```
