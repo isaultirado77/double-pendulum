@@ -6,7 +6,7 @@ Este proyecto simula el movimiento de un péndulo doble utilizando el método de
 ## Análisis y Resultados
 Los resultados, incluyendo trayectorias, espacio fase y energía, se encuentran en el notebook:
 
-[![Ver Análisis en Jupyter](https://nbviewer.jupyter.org/github/usuario/repositorio/blob/main/double_pendulum_analysis.ipynb)](https://nbviewer.jupyter.org/github/usuario/repositorio/blob/main/double_pendulum_analysis.ipynb)
+[![Ver Análisis en Jupyter](https://nbviewer.jupyter.org/github/usuario/repositorio/blob/main/double_pendulum_analysis.ipynb)](https://nbviewer.jupyter.org/github/isaultirado77/double-pendulum/blob/main/double_pendulum_analysis.ipynb)
 
 ## Ejecución de la Simulación
 
